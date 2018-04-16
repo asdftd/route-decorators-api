@@ -1,0 +1,38 @@
+{
+  "name": "generic-node-route-decorators",
+  "version": "0.9.0",
+  "description": "ES7 decorators that simplify route creation, framework independent",
+  "main": "lib/decorators.js",
+  "scripts": {
+    "prepublish": "rimraf lib && babel src --out-dir lib",
+    "test": "mocha --compilers js:babel/register 'test/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buunguyen/route-decorators.git"
+  },
+  "keywords": [
+    "es6",
+    "es7",
+    "es2015",
+    "es2016",
+    "decorators",
+    "koa",
+    "express",
+    "route",
+    "routing"
+  ],
+  "author": "Buu Nguyen <buunguyen@gmail.com> (https://github.com/buunguyen)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buunguyen/route-decorators/issues"
+  },
+  "homepage": "https://github.com/buunguyen/route-decorators#readme",
+  "devDependencies": {
+    "babel": "^5.8.34",
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "rimraf": "^2.4.4",
+    "sinon": "^1.17.2"
+  }
+}
