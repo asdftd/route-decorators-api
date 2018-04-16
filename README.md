@@ -1,8 +1,6 @@
 ## route-decorators for Koa/Express
 
-[![NPM](https://nodei.co/npm/route-decorators.png?compact=true)](https://www.npmjs.com/package/route-decorators)
-
-[![Build Status](https://travis-ci.org/buunguyen/route-decorators.svg?branch=master)](https://travis-ci.org/buunguyen/route-decorators)
+This is a fork from [buunguyen/route-decorators](https://github.com/buunguyen/route-decorators)
 
 [ES7 decorators](https://github.com/wycats/javascript-decorators) that simplify Koa and Express route creation. Using these decorators, you can write your controllers like below and have all the routes populated.
 
