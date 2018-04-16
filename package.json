@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buunguyen/route-decorators.git"
+    "url": "git+https://github.com/asdftd/generic-router-decorators"
   },
   "keywords": [
     "es6",
@@ -22,12 +22,12 @@
     "route",
     "routing"
   ],
-  "author": "Buu Nguyen <buunguyen@gmail.com> (https://github.com/buunguyen)",
+  "author": "ASDFTF (https://github.com/asdftd)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/buunguyen/route-decorators/issues"
+    "url": "https://github.com/asdftd/generic-router-decorators/issues"
   },
-  "homepage": "https://github.com/buunguyen/route-decorators#readme",
+  "homepage": "https://github.com/asdftd/generic-router-decorators#readme",
   "devDependencies": {
     "babel": "^5.8.34",
     "chai": "^3.4.1",
