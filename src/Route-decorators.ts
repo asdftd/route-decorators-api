@@ -5,7 +5,7 @@ function destruct(args) {
   const path = hasPath ? args[0] : ''
   const middleware = hasPath ? args.slice(1) : args
 
-  if (middleware.some(m => typeof m !== 'function')) {
+  if(middleware.some(m => typeof m !== 'function')) {
     throw new Error('Middleware must be function')
   }
 
@@ -13,27 +13,38 @@ function destruct(args) {
 }
 
 // @route(method, path: optional, ...middleware: optional)
-export function route(method, ...args) {
-  if (typeof method !== 'string') {
+export function Route(method, ...args) {
+  if(typeof method !== 'string') {
     throw new Error('The first argument must be an HTTP method')
   }
 
   const [path, middleware] = destruct(args)
 
-  return function (target, name) {
+  return function(target, name) {
     target[`${PREFIX}${name}`] = {method, path, middleware}
   }
 }
 
 // @[method](...args) === @route(method, ...args)
-const methods = ['head', 'options', 'get', 'post', 'put', 'patch', 'del', 'delete', 'all']
-methods.forEach(method => exports[method] = route.bind(null, method))
+// const methods = ['head', 'options', 'get', 'post', 'put', 'patch', 'del', 'delete', 'all']
+
+export const Head = Route.bind(null, "head");
+export const Options = Route.bind(null, "options");
+export const Get = Route.bind(null, "get");
+export const Post = Route.bind(null, "post");
+export const Put = Route.bind(null, "put");
+export const Patch = Route.bind(null, "patch");
+export const Del = Route.bind(null, "del");
+const deleteRoute = Route.bind(null, "delete");
+export {deleteRoute as Delete };
+export const All = Route.bind(null, "all");
+
 
 // @controller(path: optional, ...middleware: optional)
 export function controller(...args) {
   const [ctrlPath, ctrlMiddleware] = destruct(args)
 
-  return function (target) {
+  return function(target) {
     const proto = target.prototype
     proto.$routes = Object.getOwnPropertyNames(proto)
       .filter(prop => prop.indexOf(PREFIX) === 0)
