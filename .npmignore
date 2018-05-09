@@ -1,4 +1,4 @@
 src
 test
-.babelrc
-.travis.yml
+webpack.config.js
+tsconfig.json

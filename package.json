@@ -1,15 +1,15 @@
 {
-  "name": "generic-node-route-decorators",
-  "version": "0.9.0",
+  "name": "generic-route-decorators",
+  "version": "0.1.0",
   "description": "ES7 decorators that simplify route creation, framework independent",
-  "main": "lib/decorators.js",
+  "main": "lib/index.js",
   "scripts": {
-    "prepublish": "rimraf lib && babel src --out-dir lib",
+    "build": "./node_modules/.bin/webpack -p",
     "test": "mocha --compilers js:babel/register 'test/*.js'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asdftd/generic-router-decorators"
+    "url": "git+https://github.com/asdftd/generic-route-decorators"
   },
   "keywords": [
     "es6",
@@ -25,14 +25,18 @@
   "author": "ASDFTF (https://github.com/asdftd)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/asdftd/generic-router-decorators/issues"
+    "url": "https://github.com/asdftd/generic-route-decorators/issues"
   },
-  "homepage": "https://github.com/asdftd/generic-router-decorators#readme",
+  "homepage": "https://github.com/asdftd/generic-route-decorators#readme",
   "devDependencies": {
+    "awesome-typescript-loader": "^5.0.0",
     "babel": "^5.8.34",
     "chai": "^3.4.1",
     "mocha": "^2.3.4",
     "rimraf": "^2.4.4",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.2",
+    "typescript": "^2.8.3",
+    "webpack": "^4.8.1",
+    "webpack-cli": "^2.1.3"
   }
 }
