@@ -5,7 +5,8 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "build": "./node_modules/.bin/webpack -p",
+    "build": "rimraf lib && tsc",
+    "package": "cpy package.json lib/",
     "test": "mocha --compilers js:babel/register 'test/*.js'"
   },
   "repository": {
@@ -33,8 +34,9 @@
     "awesome-typescript-loader": "^5.0.0",
     "babel": "^5.8.34",
     "chai": "^3.4.1",
+    "cpy-cli": "^1.0.1",
     "mocha": "^2.3.4",
-    "rimraf": "^2.4.4",
+    "rimraf": "^2.6.2",
     "sinon": "^1.17.2",
     "typescript": "^2.8.3",
     "webpack": "^4.8.1",
