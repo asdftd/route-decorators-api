@@ -2,7 +2,8 @@
   "name": "generic-route-decorators",
   "version": "0.1.1",
   "description": "ES7 decorators that simplify route creation, framework independent",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "build": "./node_modules/.bin/webpack -p",
     "test": "mocha --compilers js:babel/register 'test/*.js'"
