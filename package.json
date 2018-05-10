@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asdftd/generic-route-decorators"
+    "url": "git+https://github.com/asdftd/route-decorators-api"
   },
   "keywords": [
     "es6",
@@ -25,9 +25,9 @@
   "author": "ASDFTF (https://github.com/asdftd)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/asdftd/generic-route-decorators/issues"
+    "url": "https://github.com/asdftd/route-decorators-api/issues"
   },
-  "homepage": "https://github.com/asdftd/generic-route-decorators#readme",
+  "homepage": "https://github.com/asdftd/route-decorators-api#readme",
   "devDependencies": {
     "babel": "^5.8.34",
     "chai": "^3.4.1",
