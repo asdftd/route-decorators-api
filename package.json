@@ -1,6 +1,6 @@
 {
   "name": "generic-route-decorators",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "ES7 decorators that simplify route creation, framework independent",
   "scripts": {
     "build": "rimraf lib && tsc",
