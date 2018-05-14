@@ -4,7 +4,7 @@
   "description": "ES7 decorators that simplify route creation, framework independent",
   "scripts": {
     "build": "rimraf lib && tsc",
-    "package": "cpy package.json README.md lib/",
+    "package": "cpy package.json README.md LICENSE lib/",
     "test": "mocha --compilers js:babel/register 'test/*.js'"
   },
   "repository": {
