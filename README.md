@@ -6,30 +6,30 @@ This is a fork from [buunguyen/route-decorators](https://github.com/buunguyen/ro
 
 __Koa__
 ```js
-import {controller, get, post} from 'route-decorators'
+import {Controller, Get, Post} from 'generic-route-decorators'
 
-@controller('/users', middleware1)
+@Controller('/users', middleware1)
 class UserCtrl {
 
-  @get('/:id', middleware2, middleware3)
+  @Get('/:id', middleware2, middleware3)
   async get(context, next) {}
 
-  @post(middleware2)
+  @Post(middleware2)
   async post(context, next) {}
 }
 ```
 
 __Express__
 ```js
-import {controller, get, post} from 'route-decorators'
+import {Controller, Get, Post} from 'generic-route-decorators'
 
-@controller('/users', middleware1)
+@Controller('/users', middleware1)
 class UserCtrl {
 
-  @get('/:id', middleware2, middleware3)
+  @Get('/:id', middleware2, middleware3)
   async get(req, res, next) {}
 
-  @post(middleware2)
+  @Post(middleware2)
   async post(req, res, next) {}
 }
 ```
@@ -40,7 +40,7 @@ Assume the above `UserCtrl` definition, you can define routes in `UserCtrl`'s co
 
 __Koa__
 ```js
-import Router from 'koa-66'
+import * as Router from "koa-router";
 
 // Inside controller constructor
 this.router = new Router()
@@ -74,16 +74,16 @@ class BaseCtrl {
   }
 }
 
-@controller(...)
+@Controller(...)
 class UserCtrl extends BaseCtrl {
   // decorated methods as above
 }
 ```
 
 ### Decorators
- * `@controller(path: optional, ...middleware: optional)`
- * `@route(method, path: optional, ...middleware: optional)`
- * `@head`, `@options`, `@get`, `@post`, `@put`, `@patch`, `@del`, `@delete`, `@all`: wrappers of `@route` that automatically supply the `method` argument.
+ * `@Controller(path: optional, ...middleware: optional)`
+ * `@Route(method, path: optional, ...middleware: optional)`
+ * `@Head`, `@Options`, `@Get`, `@Post`, `@Put`, `@Patch`, `@Del`, `@Delete`, `@All`: wrappers of `@Route` that automatically supply the `method` argument.
 
 ### Test
 
