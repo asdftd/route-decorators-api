@@ -1,5 +1,5 @@
 ## route-decorators for node
-Work in Progress!!<br />
+Work in Progress!!  
 This is a fork from [buunguyen/route-decorators](https://github.com/buunguyen/route-decorators)
 
 [ES7 decorators](https://github.com/wycats/javascript-decorators) that simplify route creation. Using these decorators, you can write your controllers like below and have all the routes populated. This is just an API which provides you the needed route objects, which you can use for your own router. Totally framework independent.
@@ -151,8 +151,8 @@ export function KoaParamTransformer(param: string, ...validators: Function[]) {
 DecoratorProcessor.registerProcessorFunction(DecoratorType.REQUEST_PARAM, KoaParamTransformer);
 ```
 
-Transformer functions are returning a function which has the function definition of your route functions<br />
-Every Decorator has a appropriate Decoratortype, see all types: [DecoratorTypes](https://github.com/asdftd/route-decorators-api/blob/master/src/DecoratorType.ts)<br />
+Transformer functions are returning a function which has the function definition of your route functions  
+Every Decorator has a appropriate Decoratortype, see all types: [DecoratorTypes](https://github.com/asdftd/route-decorators-api/blob/master/src/DecoratorType.ts)
 
 2. Apply the decorators
 
@@ -180,7 +180,7 @@ class BaseCtrl {
 ```
 
 ## !Be careful!
-when you use route parameter decorators all other non decorated parameters will be undefined<br />
+when you use route parameter decorators all other non decorated parameters will be undefined  
 ```js
     @Get("/getit")
     getIt(@RequestParam("a") a, b, @RequestParam("c") c) {
