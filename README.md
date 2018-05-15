@@ -5,9 +5,9 @@ This is a fork from [buunguyen/route-decorators](https://github.com/buunguyen/ro
 [ES7 decorators](https://github.com/wycats/javascript-decorators) that simplify route creation. Using these decorators, you can write your controllers like below and have all the routes populated. This is just an API which provides you the needed route objects, which you can use for your own router. Totally framework independent.
 
   - [Route Decorators](#route-decorators)
-  - [Route Parameter Decorators](#Route-Parameter-Decorators)
-  - [Custom Route Parameter Decorators](#Custom-Route-Parameter-Decorators)
-  - [Decorators](#Decorators)
+  - [Route Parameter Decorators](#route-parameter-decorators)
+  - [Custom Route Parameter Decorators](#custom-route-parameter-decorators)
+  - [Decorators](#decorators)
 
 # Usage
 1. Install [reflect-metadata](https://www.npmjs.com/package/reflect-metadata) package:
@@ -123,13 +123,13 @@ Example:
 for this to work you have to do 2 things:
 
 1. Register a transformer Function which fits your needs (Framework specific)
-<br />  
+
 __Express__
+
 ```js
 import {DecoratorType, DecoratorProcessor} from 'generic-route-decorators';
 .
 .
-
 export function ExpressParamTransformer(param: string, ...validators: Function[]) {
 
     return function(req, res, next) {
@@ -138,7 +138,9 @@ export function ExpressParamTransformer(param: string, ...validators: Function[]
 }
 DecoratorProcessor.registerProcessorFunction(DecoratorType.REQUEST_PARAM, ExpressParamTransformer);
 ```
+
 __Koa__
+
 ```js
 export function KoaParamTransformer(param: string, ...validators: Function[]) {
 
@@ -153,6 +155,7 @@ Transformer functions are returning a function which has the function definition
 Every Decorator has a appropriate Decoratortype, see all types: [DecoratorTypes](https://github.com/asdftd/route-decorators-api/blob/master/src/DecoratorType.ts)<br />
 
 2. Apply the decorators
+
 ```js
 import {DecoratorProcessor} from 'generic-route-decorators';
 .
