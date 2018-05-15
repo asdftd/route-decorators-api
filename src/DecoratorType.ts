@@ -1,4 +1,7 @@
 export enum DecoratorType {
     REQUEST_PARAM = "__requestparam__",
-    BODY = "__body__"
+    REQUEST = "__request__",
+    RESPONSE = "__response__",
+    BODY = "__body__",
+    NEXT = "__next__",
 }
