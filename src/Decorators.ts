@@ -14,6 +14,24 @@ export function Body() {
     };
 }
 
+export function Next() {
+    return (target: any, propertyKey: string, index: number) => {
+        setDecorator(target, propertyKey, index, DecoratorType.NEXT);
+    };
+}
+
+export function Request() {
+    return (target: any, propertyKey: string, index: number) => {
+        setDecorator(target, propertyKey, index, DecoratorType.REQUEST);
+    };
+}
+
+export function Response() {
+    return (target: any, propertyKey: string, index: number) => {
+        setDecorator(target, propertyKey, index, DecoratorType.RESPONSE);
+    };
+}
+
 export function setDecorator(target: any, propertyKey: string, index: number, type: string, values?: any[]) {
     let decos = {
         [propertyKey]: {
