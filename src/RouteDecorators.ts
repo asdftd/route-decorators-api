@@ -40,8 +40,8 @@ export {deleteRoute as Delete };
 export const All = Route.bind(null, "all");
 
 
-// @controller(path: optional, ...middleware: optional)
-export function controller(...args) {
+// @Controller(path: optional, ...middleware: optional)
+export function Controller(...args) {
   const [ctrlPath, ctrlMiddleware] = destruct(args)
 
   return function(target) {
