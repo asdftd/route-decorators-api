@@ -9,7 +9,7 @@ function destruct(args) {
     throw new Error('Middleware must be function')
   }
 
-  return [path, middleware]
+  return [path, middleware];
 }
 
 // @route(method, path: optional, ...middleware: optional)
@@ -18,7 +18,7 @@ export function Route(method, ...args) {
     throw new Error('The first argument must be an HTTP method')
   }
 
-  const [path, middleware] = destruct(args)
+  const [path, middleware] = destruct(args);
 
   return function(target, name) {
     target[`${PREFIX}${name}`] = {method, path, middleware}
@@ -42,7 +42,7 @@ export const All = Route.bind(null, "all");
 
 // @Controller(path: optional, ...middleware: optional)
 export function Controller(...args) {
-  const [ctrlPath, ctrlMiddleware] = destruct(args)
+  const [ctrlPath, ctrlMiddleware] = destruct(args);
 
   return function(target) {
     const proto = target.prototype
@@ -54,6 +54,6 @@ export function Controller(...args) {
         const middleware = ctrlMiddleware.concat(actionMiddleware)
         const fnName = prop.substring(PREFIX.length)
         return {method: method === 'del' ? 'delete' : method, url, middleware, fnName}
-      })
+      });
   }
 }
