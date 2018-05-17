@@ -3,13 +3,24 @@
   "version": "0.1.10",
   "description": "ES7 decorators that simplify route creation, framework independent",
   "scripts": {
-    "build": "rimraf lib && tsc",
+    "build": "rimraf lib && tsc -p tsconfig.build.json",
     "package": "cpy package.json README.md LICENSE lib/",
-    "test": "mocha --compilers js:babel/register 'test/*.js'"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/asdftd/route-decorators-api"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
   },
   "keywords": [
     "es6",
@@ -29,12 +40,12 @@
   },
   "homepage": "https://github.com/asdftd/route-decorators-api#readme",
   "devDependencies": {
-    "babel": "^5.8.34",
+    "@types/jest": "^22.2.3",
     "chai": "^3.4.1",
     "cpy-cli": "^1.0.1",
-    "mocha": "^2.3.4",
+    "jest": "^22.4.3",
     "rimraf": "^2.6.2",
-    "sinon": "^1.17.2",
+    "ts-jest": "^22.4.6",
     "typescript": "^2.8.3"
   }
 }
