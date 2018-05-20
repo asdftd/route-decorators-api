@@ -7,7 +7,7 @@ function m2() {}
 function m3() {}
 function m4() {}
 
-describe('controller', () => {
+describe('Controller and Routes', () => {
 
   it('should add $routes', () => {
     @Controller()
@@ -49,7 +49,7 @@ describe('controller', () => {
       @All('/all') _all() {}
     }
 
-    assert.deepEqual((new Ctrl()).$routes, [
+    assert.deepEqual((<any>new Ctrl()).$routes, [
       {url: '/prefix/all', middleware: [], method: 'all', fnName: '_all'}
     ])
   })

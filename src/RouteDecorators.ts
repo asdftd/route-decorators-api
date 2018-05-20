@@ -1,12 +1,14 @@
+import {DecoratorProcessor} from "./DecoratorProcessor";
+
 const PREFIX = '$$route_'
 
 function destruct(args) {
-  const hasPath = typeof args[0] === 'string'
-  const path = hasPath ? args[0] : ''
-  const middleware = hasPath ? args.slice(1) : args
+  const hasPath = typeof args[0] === 'string';
+  const path = hasPath ? args[0] : '';
+  const middleware = hasPath ? args.slice(1) : args;
 
   if(middleware.some(m => typeof m !== 'function')) {
-    throw new Error('Middleware must be function')
+    throw new Error('Middleware must be function');
   }
 
   return [path, middleware];
@@ -45,7 +47,7 @@ export function Controller(...args) {
   const [ctrlPath, ctrlMiddleware] = destruct(args);
 
   return function(target) {
-    const proto = target.prototype
+    const proto = target.prototype;
     proto.$routes = Object.getOwnPropertyNames(proto)
       .filter(prop => prop.indexOf(PREFIX) === 0)
       .map(prop => {

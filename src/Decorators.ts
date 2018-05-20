@@ -32,6 +32,13 @@ export function Response() {
     };
 }
 
+export function QueryParam(name: string, ...validators: Function[]) {
+    if(!name) throw new Error("A name must be defined for the Query parameter");
+    return (target: any, propertyKey: string, index: number) => {
+        setDecorator(target, propertyKey, index, DecoratorType.QUERY_PARAM, [name, validators]);
+    };
+}
+
 export function setDecorator(target: any, propertyKey: string, index: number, type: string, values?: any[]) {
     let decos = {
         [propertyKey]: {

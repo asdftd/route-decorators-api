@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.build.json",
     "package": "cpy package.json README.md LICENSE lib/",
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
   },
   "homepage": "https://github.com/asdftd/route-decorators-api#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.3",
     "@types/jest": "^22.2.3",
     "chai": "^3.4.1",
     "cpy-cli": "^1.0.1",

@@ -7,7 +7,7 @@ export class DecoratorProcessor {
     static applyDecorators(target: any) {
         Object.entries(target[PREFIX]).forEach(
             ([funcName, decoParams]) =>
-                target[funcName] = this.getFunc.bind(this, target[funcName], decoParams, target)()
+                target[funcName] = this.getFunc(target[funcName], decoParams, target)
         );
     }
 

@@ -200,6 +200,7 @@ Readme coming soon ..
  * `@Route(method, path: optional, ...middleware: optional)`
  * `@Head`, `@Options`, `@Get`, `@Post`, `@Put`, `@Patch`, `@Del`, `@Delete`, `@All`: wrappers of `@Route` that automatically supply the `method` argument.
  * `@RequestParam(paramName, ...validators: optional)`
+ * `@QueryParam(paramName, ...validators: optional)`
  * `@Request()`
  * `@Response()`
  * `@Body()`
