@@ -2,7 +2,7 @@
     "compileOnSave": false,
       "compilerOptions": {
         "target": "es6",
-        "module": "commonjs",
+        "module": "es2015",
         "sourceMap": true,
         "declaration": true,
         "moduleResolution": "node",
