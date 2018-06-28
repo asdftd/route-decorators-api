@@ -4,7 +4,7 @@ import {PREFIX} from "./Decorators";
 export class DecoratorProcessor {
     private static processorFunctions = new Map<string, any>();
 
-    static applyDecorators(target: any) {
+    public static applyDecorators(target: any) {
         Object.entries(target[PREFIX]).forEach(
             ([funcName, decoParams]) =>
                 target[funcName] = this.getFunc(target[funcName], decoParams, target)

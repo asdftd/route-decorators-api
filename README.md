@@ -115,15 +115,15 @@ Example:
 
 ```js
     @Get("/getit")
-    getIt(@RequestParam("reqpar") par, @Next() next)  {
+    async getIt(@RequestParam("reqpar") par, @Next() next)  {
       //do something
     }
 ```
-
-for this to work you have to do 2 things:
-
-1. Register a transformer Function which fits your needs (Framework specific)
-
+  
+to make use of the decorators you have to do 2 things:  
+  
+1. Register a transformer Function which fits your needs (Framework specific)  
+  
 __Express__
 
 ```js
@@ -178,12 +178,40 @@ class BaseCtrl {
   }
 }
 ```
+Could also be used without route parameters:
+
+```js
+class BaseTest {
+  constructor() {
+    DecoratorProcessor.applyDecorators(this);
+    }
+}
+let testReq = 1;
+let testRes = 2;
+let testNext = 3;
+function TestParamTransformer(param: string, ...validators: Function[]) {
+  return function(req, res, next) {
+    console.log(req); //1
+    console.log(res); //2
+    console.log(next); //3
+    console.log(param); //abc
+    return "test"+req+res+next+"test"+param;
+  }
+}
+DecoratorProcessor.registerProcessorFunction(DecoratorType.REQUEST_PARAM,TestParamTransformer);
+class Ctrl extends BaseTest {
+  reqParamTest(@RequestParam("abc") a: any): void {
+    console.log(a); //test123testabc
+  }
+}
+new Ctrl().reqParamTest(testReq, testRes, testNext);
+```
 
 ## !Be careful!
 when you use route parameter decorators all other non decorated parameters will be undefined  
 ```js
     @Get("/getit")
-    getIt(@RequestParam("a") a, b, @RequestParam("c") c) {
+    async getIt(@RequestParam("a") a, b, @RequestParam("c") c) {
         console.log(a);
         console.log(b); // undefined
         console.log(c);
@@ -193,7 +221,45 @@ when you use route parameter decorators all other non decorated parameters will 
 Custom Route Parameter Decorators
 =============
 
-Readme coming soon ..
+```js
+import {setDecorator} from "generic-route-decorators";
+
+// register the decorator with unique string value
+const customDecoratorIdentifier="EveryDecoratorHasItsOwnIdentifierString";
+
+//first define your decorator
+export function CustomDecorator(value: any) { //use your own parameters
+
+    // call setDecorator with given values and your identifier
+    // the last parameter is an array from your parameter values
+    return (target: any, propertyKey: string, index: number) => { 
+        setDecorator(target, propertyKey, index, customDecoratorIdentifier, [value]);
+    };
+}
+
+// define processor function
+export function decoratorProcessorFunction(value: any){
+    return function(req, res, next) {
+        return value+"4";
+    }
+}
+
+// set function for decorator with unique decorator identifier
+DecoratorProcessor.registerProcessorFunction(customDecoratorIdentifier, decoratorProcessorFunction);
+
+// use it
+export class SomeClass {
+
+    constructor() {
+        DecoratorProcessor.applyDecorators(this);
+    }
+
+    async example(@CustomDecorator("some123") abc: any): void {
+        console.log(abc); //some1234
+    }
+}
+```
+
 
 ### Decorators
  * `@Controller(path: optional, ...middleware: optional)`

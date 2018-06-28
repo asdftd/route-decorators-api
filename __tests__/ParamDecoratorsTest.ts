@@ -3,7 +3,7 @@ import {DecoratorProcessor} from '../src/DecoratorProcessor';
 import {DecoratorType} from '../src/DecoratorType';
 
 import {assert} from 'chai';
-import {RequestParam, PREFIX} from '../src/Decorators';
+import {RequestParam, PREFIX, Body} from '../src/Decorators';
 
 describe('Param Decorators', () => {
   describe('@RequestParam', () => {
@@ -70,14 +70,20 @@ describe('Param Decorators', () => {
   });
   describe('@Body', () => {
 
-    it('should work', () => {
-      function TestBodyTransformer(param: string, ...validators: Function[]) {
+    it('should execute and return the transformer functions value', () => {
+      function TestBodyTransformer() {
         return function(req, res, next) {
-          return param+"123";
+          assert.equal(req, "123");
+          return "Body123";
         }
       }
       DecoratorProcessor.registerProcessorFunction(DecoratorType.BODY, TestBodyTransformer);
-
+      class Ctrl extends BaseTest {
+        reqParamTest(@Body() a: string|any): void {
+          assert.equal(a, "Body123");
+        }
+      }
+      new Ctrl().reqParamTest("123");
     });
   });
 });
