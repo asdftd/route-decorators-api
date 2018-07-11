@@ -31,7 +31,7 @@ This is a fork from [buunguyen/route-decorators](https://github.com/buunguyen/ro
 ```
 
 Route Decorators
-=============
+==============
 
 __Koa__
 ```js
@@ -122,7 +122,7 @@ Example:
   
 to make use of the decorators you have to do 2 things:  
   
-1. Register a transformer Function which fits your needs (Framework specific)  
+ * Register a transformer Function which fits your needs (Framework specific)  
   
 __Express__
 
@@ -154,7 +154,7 @@ DecoratorProcessor.registerProcessorFunction(DecoratorType.REQUEST_PARAM, KoaPar
 Transformer functions are returning a function which has the function definition of your route functions  
 Every Decorator has a appropriate Decoratortype, see all types: [DecoratorTypes](https://github.com/asdftd/route-decorators-api/blob/master/src/DecoratorType.ts)
 
-2. Apply the decorators
+ * Apply the decorators
 
 ```js
 import {DecoratorProcessor} from 'generic-route-decorators';
@@ -178,7 +178,7 @@ class BaseCtrl {
   }
 }
 ```
-Could also be used without route parameters:
+Can also be used without route parameters:
 
 ```js
 class BaseTest {
@@ -222,15 +222,15 @@ Custom Route Parameter Decorators
 =============
 
 ```js
-import {setDecorator} from "generic-route-decorators";
+import {setDecorator, DecoratorProcessor} from "generic-route-decorators";
 
 // register the decorator with unique string value
 const customDecoratorIdentifier="EveryDecoratorHasItsOwnIdentifierString";
 
-//first define your decorator
-export function CustomDecorator(value: any) { //use your own parameters
+//first define your decorator function
+export function CustomDecorator(value: any) { // define your own parameters
 
-    // call setDecorator with given values and your identifier
+    // call the static setDecorator function with given values and your identifier
     // the last parameter is an array from your parameter values
     return (target: any, propertyKey: string, index: number) => { 
         setDecorator(target, propertyKey, index, customDecoratorIdentifier, [value]);
@@ -259,7 +259,59 @@ export class SomeClass {
     }
 }
 ```
+## Recommened usage with Typescript
 
+As the decorators can also be used without a framework (for whatever use case you may have) here are tips for typescript usage.
+
+* Type safety in the processor function:
+```js
+import {SomeVeryComplicatedObject, ReturnObject} from "./somewhere";
+import {setDecorator, DecoratorProcessor} from "generic-route-decorators";
+
+const customDecoratorIdentifier="EveryDecoratorHasItsOwnIdentifierString";
+
+export function CustomDecorator(value: any) {
+
+    return (target: any, propertyKey: string, index: number) => { 
+        setDecorator(target, propertyKey, index, customDecoratorIdentifier, [value]);
+    };
+}
+
+export function decoratorProcessorFunction(value: any){
+    return function(param: SomeVeryComplicatedObject) {
+        if(param instanceof SomeVeryComplicatedObject === false){
+          throw new Error("You need to call the function with the right type");
+        }
+        // we can be sure now that param is SomeVeryComplicatedObject
+        return param.getAntotherObject(); // return ReturnObject type
+    }
+}
+
+DecoratorProcessor.registerProcessorFunction(customDecoratorIdentifier, decoratorProcessorFunction);
+```
+
+* Type safety in the consuming function:  
+Define the parameter as union type, so it can be called type safe with the calling parameter object and also be consumed as the type which the processor function returns (in this case the ReturnObject).  
+Optionally you can use instanceof to check the type at runtime.
+
+```js
+export class SomeClass {
+
+    constructor() {
+        DecoratorProcessor.applyDecorators(this);
+    }
+
+    example(@CustomDecorator("123") result: SomeVeryComplicatedObject | ReturnObject): void {
+        result = result as ReturnObject;
+        console.log(result); // work with ReturnObject type
+        return result;
+    }
+}
+
+let myObject: SomeVeryComplicatedObject = new SomeVeryComplicatedObject();
+
+new SomeClass().example(myObject);
+```
 
 ### Decorators
  * `@Controller(path: optional, ...middleware: optional)`
