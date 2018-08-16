@@ -18,7 +18,7 @@ describe('Controller and Routes', () => {
 
   it('should throw if @controller is given non-function middleware', () => {
     assert.throws(() => {
-      @Controller(1)
+      @Controller("/1", 1234)
       class Ctrl {}
     }, Error, 'Middleware must be function')
   })

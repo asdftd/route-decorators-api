@@ -14,7 +14,7 @@ This is a fork from [buunguyen/route-decorators](https://github.com/buunguyen/ro
 
     `npm install reflect-metadata --save`
 
-    and import it somewhere in the global place of your app before any service declaration or import (for example in `app.ts`):
+    and import it somewhere in the global place of your app before any decorator usage or import (for example in `app.ts`):
 
     `import "reflect-metadata";`
 
@@ -186,9 +186,7 @@ class BaseTest {
     DecoratorProcessor.applyDecorators(this);
     }
 }
-let testReq = 1;
-let testRes = 2;
-let testNext = 3;
+
 function TestParamTransformer(param: string, ...validators: Function[]) {
   return function(req, res, next) {
     console.log(req); //1
@@ -198,24 +196,17 @@ function TestParamTransformer(param: string, ...validators: Function[]) {
     return "test"+req+res+next+"test"+param;
   }
 }
+
 DecoratorProcessor.registerProcessorFunction(DecoratorType.REQUEST_PARAM,TestParamTransformer);
 class Ctrl extends BaseTest {
   reqParamTest(@RequestParam("abc") a: any): void {
     console.log(a); //test123testabc
   }
 }
+let testReq = 1;
+let testRes = 2;
+let testNext = 3;
 new Ctrl().reqParamTest(testReq, testRes, testNext);
-```
-
-## !Be careful!
-when you use route parameter decorators all other non decorated parameters will be undefined  
-```js
-    @Get("/getit")
-    async getIt(@RequestParam("a") a, b, @RequestParam("c") c) {
-        console.log(a);
-        console.log(b); // undefined
-        console.log(c);
-    }
 ```
 
 Custom Route Parameter Decorators
@@ -313,16 +304,37 @@ let myObject: SomeVeryComplicatedObject = new SomeVeryComplicatedObject();
 new SomeClass().example(myObject);
 ```
 
-### Decorators
+## Additional Notes
+when you use route parameter decorators all other non decorated parameters will be undefined  
+```js
+    @Get("/getit")
+    async getIt(@RequestParam("a") a, b, @RequestParam("c") c) {
+        console.log(a);
+        console.log(b); // undefined
+        console.log(c);
+    }
+```
+
+__No Decorator has automatically Error handling, it's all up to you.__
+# Decorators
+## Class
+
  * `@Controller(path: optional, ...middleware: optional)`
+  
+## Method Header
+
  * `@Route(method, path: optional, ...middleware: optional)`
  * `@Head`, `@Options`, `@Get`, `@Post`, `@Put`, `@Patch`, `@Del`, `@Delete`, `@All`: wrappers of `@Route` that automatically supply the `method` argument.
+  
+## Method arguments
+
  * `@RequestParam(paramName, ...validators: optional)`
  * `@QueryParam(paramName, ...validators: optional)`
  * `@Request()`
  * `@Response()`
  * `@Body()`
  * `@Next()`
+ * And every Decorator you can think of ;-)
  * .. more coming, feel free to suggest/pr
 
 ### Test
