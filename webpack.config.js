@@ -1,25 +1,28 @@
 const path = require('path');
 
 module.exports = {
-    mode: "production",
+    mode: "development",
     target: 'node',
     context: path.resolve("src"),
     entry: './index.ts',
+    
     output: {
+        path: path.resolve(__dirname, 'dist'),
         filename: 'index.js',
-        path: path.resolve(__dirname, 'dist')
+        chunkFilename: '[chunkhash].js',
+        libraryTarget: "umd"
     },
     resolve : {
-        extensions : [".ts"]
+        extensions : [".webpack.js", ".web.js", ".ts", ".js"]
       },
     "devtool": "source-map",
     module: {
         rules: [{
             "test": /\.tsx?$/,
             "exclude": /node_modules/,
-            loader: "ts-loader",
+            loader: "awesome-typescript-loader",
             options: {
-                configFile: "tsconfig.build.json"
+                configFileName: "tsconfig.build.json"
             }
         }]
     }

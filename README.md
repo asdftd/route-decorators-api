@@ -315,7 +315,7 @@ when you use route parameter decorators all other non decorated parameters will 
     }
 ```
 
-__No Decorator has automatically Error handling, it's all up to you.__
+__No decorator has built-in error handling, it's all up to you.__
 # Decorators
 ## Class
 
