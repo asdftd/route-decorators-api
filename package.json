@@ -3,8 +3,8 @@
   "version": "0.1.11",
   "description": "ES7 decorators that simplify route creation, framework independent",
   "scripts": {
-    "build": "rimraf lib && tsc -p tsconfig.build.json",
-    "package": "cpy package.json README.md LICENSE lib/",
+    "build": "rimraf dist && webpack --config webpack.config.js",
+    "package": "cpy package.json README.md LICENSE dist/",
     "test": "jest --verbose"
   },
   "repository": {
@@ -47,6 +47,9 @@
     "jest": "^22.4.3",
     "rimraf": "^2.6.2",
     "ts-jest": "^22.4.6",
-    "typescript": "^2.8.3"
+    "ts-loader": "^4.4.2",
+    "typescript": "^2.8.3",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
   }
 }

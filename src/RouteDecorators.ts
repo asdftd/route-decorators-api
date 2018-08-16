@@ -22,31 +22,41 @@ export function Route(method, ...args) {
 
   const [path, middleware] = destruct(args);
 
-  return function(target, name) {
+  return function(target, name, propertyDescriptor) {
+    if (!isObjectOrFunction(target) || typeof name !== "string"  || typeof propertyDescriptor !== "object" || arguments.length !== 3) {
+      throw new Error("@Route or @<HttpMethod> must be declared on a class function");
+    }
     target[`${PREFIX}${name}`] = {method, path, middleware}
   }
 }
 
+export type RouteMethodSignature = (path?: string, ...middleware: any[]) => (target: any, name: any) => void
+
 // @[method](...args) === @route(method, ...args)
 // const methods = ['head', 'options', 'get', 'post', 'put', 'patch', 'del', 'delete', 'all']
 
-export const Head = Route.bind(null, "head");
-export const Options = Route.bind(null, "options");
-export const Get = Route.bind(null, "get");
-export const Post = Route.bind(null, "post");
-export const Put = Route.bind(null, "put");
-export const Patch = Route.bind(null, "patch");
-export const Del = Route.bind(null, "del");
-const deleteRoute = Route.bind(null, "delete");
+export const Head: RouteMethodSignature = Route.bind(null, "head");
+export const Options: RouteMethodSignature = Route.bind(null, "options");
+export const Get: RouteMethodSignature = Route.bind(null, "get");
+export const Post: RouteMethodSignature = Route.bind(null, "post");
+export const Put: RouteMethodSignature = Route.bind(null, "put");
+export const Patch: RouteMethodSignature = Route.bind(null, "patch");
+export const Del: RouteMethodSignature = Route.bind(null, "del");
+const deleteRoute: RouteMethodSignature = Route.bind(null, "delete");
 export {deleteRoute as Delete };
-export const All = Route.bind(null, "all");
+export const All: RouteMethodSignature = Route.bind(null, "all");
 
 
 // @Controller(path: optional, ...middleware: optional)
-export function Controller(...args) {
+export function Controller(path?: string, ...middleware: any[]) {
+
+  const args = !path ? [...middleware] : [path, ...middleware];
   const [ctrlPath, ctrlMiddleware] = destruct(args);
 
   return function(target) {
+    if (!isObjectOrFunction(target) || arguments.length !== 1) {
+      throw new Error("@Controller must be declared on a class");
+    }
     const proto = target.prototype;
     proto.$routes = Object.getOwnPropertyNames(proto)
       .filter(prop => prop.indexOf(PREFIX) === 0)
@@ -58,4 +68,8 @@ export function Controller(...args) {
         return {method: method === 'del' ? 'delete' : method, url, middleware, fnName}
       });
   }
+}
+
+function isObjectOrFunction(target: any){
+  return typeof target === 'object' || typeof target === 'function';
 }
