@@ -321,12 +321,12 @@ __No Decorator has automatically Error handling, it's all up to you.__
 
  * `@Controller(path: optional, ...middleware: optional)`
   
-## Method Header
+## Method
 
  * `@Route(method, path: optional, ...middleware: optional)`
  * `@Head`, `@Options`, `@Get`, `@Post`, `@Put`, `@Patch`, `@Del`, `@Delete`, `@All`: wrappers of `@Route` that automatically supply the `method` argument.
   
-## Method arguments
+## Method parameters
 
  * `@RequestParam(paramName, ...validators: optional)`
  * `@QueryParam(paramName, ...validators: optional)`
