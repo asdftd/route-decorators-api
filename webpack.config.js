@@ -21,7 +21,7 @@ module.exports = {
             "exclude": /node_modules/,
             loader: "awesome-typescript-loader",
             options: {
-                configFileName: "tsconfig.build.json"
+                configFileName: "tsconfig.webpack.json"
             }
         }]
     }

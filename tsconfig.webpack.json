@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig",
   "compilerOptions": {
-    "module": "umd"
+    "module": "es2015"
   },
   "exclude": [
     "node_modules",
