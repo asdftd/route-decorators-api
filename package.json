@@ -3,11 +3,14 @@
   "version": "0.2.1",
   "description": "ES7 decorators that simplify route creation, framework independent",
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "build": "rimraf dist && tsc -p tsconfig.build.json && npm run build:esm",
+    "build:esm": "rimraf dist_esm && tsc --module es2015 --outDir dist_esm -p tsconfig.build.json",
     "build:webpack": "rimraf dist && webpack --config webpack.config.js",
-    "package": "cpy package.json README.md LICENSE dist/",
+    "package": "cpy dist_esm/* package.json README.md LICENSE dist/ --parents",
     "test": "jest --verbose"
   },
+  "main": "./index.js",
+  "module": "./dist_esm/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/asdftd/route-decorators-api"

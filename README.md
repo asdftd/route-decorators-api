@@ -1,5 +1,5 @@
-## route-decorators for node
-Work in Progress!!  
+## API for route decorators
+
 This is a fork from [buunguyen/route-decorators](https://github.com/buunguyen/route-decorators)
 
 [ES7 decorators](https://github.com/wycats/javascript-decorators) that simplify route creation. Using these decorators, you can write your controllers like below and have all the routes populated. This is just an API which provides you the needed route objects, which you can use for your own router. Totally framework independent.
@@ -334,6 +334,9 @@ __No decorator has built-in error handling, it's all up to you.__
  * `@Response()`
  * `@Body()`
  * `@Next()`
+
+##
+
  * And every Decorator you can think of ;-)
  * .. more coming, feel free to suggest/pr
 
