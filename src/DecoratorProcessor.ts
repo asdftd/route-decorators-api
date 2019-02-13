@@ -1,4 +1,3 @@
-import {DecoratorType} from "./DecoratorType";
 import {PREFIX} from "./Decorators";
 
 export class DecoratorProcessor {
@@ -14,7 +13,7 @@ export class DecoratorProcessor {
     private static getFunc(sourceFunc, decorators, thisValue) {
         //this func will be executed
         return function(...args: any[]) {
-            let params: any[] = this.getParamsForFunc(args, decorators);
+            const params: any[] = DecoratorProcessor.getParamsForFunc(args, decorators);
             sourceFunc.bind(thisValue, ...params)();
         }.bind(this);
     }
