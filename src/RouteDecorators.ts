@@ -1,8 +1,6 @@
-import {DecoratorProcessor} from "./DecoratorProcessor";
-
 const PREFIX = '$$route_'
 
-function destruct(args) {
+function destruct(args: any[]) {
   const hasPath = typeof args[0] === 'string';
   const path = hasPath ? args[0] : '';
   const middleware = hasPath ? args.slice(1) : args;
@@ -15,7 +13,7 @@ function destruct(args) {
 }
 
 // @route(method, path: optional, ...middleware: optional)
-export function Route(method, ...args) {
+export function Route(method: string, ...args: any[]) {
   if(typeof method !== 'string') {
     throw new Error('The first argument must be an HTTP method')
   }
@@ -30,10 +28,10 @@ export function Route(method, ...args) {
   }
 }
 
-export type RouteMethodSignature = (path?: string, ...middleware: any[]) => (target: any, name: any) => void
+export type RouteMethodSignature = (path?: string | any, ...middleware: any[]) => (target: any, name: any) => void;
+                                           
 
 // @[method](...args) === @route(method, ...args)
-// const methods = ['head', 'options', 'get', 'post', 'put', 'patch', 'del', 'delete', 'all']
 
 export const Head: RouteMethodSignature = Route.bind(null, "head");
 export const Options: RouteMethodSignature = Route.bind(null, "options");
@@ -48,6 +46,7 @@ export const All: RouteMethodSignature = Route.bind(null, "all");
 
 
 // @Controller(path: optional, ...middleware: optional)
+export function Controller(...middleware: any[]);
 export function Controller(path?: string, ...middleware: any[]) {
 
   const args = !path ? [...middleware] : [path, ...middleware];
@@ -61,10 +60,10 @@ export function Controller(path?: string, ...middleware: any[]) {
     proto.$routes = Object.getOwnPropertyNames(proto)
       .filter(prop => prop.indexOf(PREFIX) === 0)
       .map(prop => {
-        const {method, path, middleware: actionMiddleware} = proto[prop]
-        const url = `${ctrlPath}${path}`
-        const middleware = ctrlMiddleware.concat(actionMiddleware)
-        const fnName = prop.substring(PREFIX.length)
+        const {method, path, middleware: actionMiddleware} = proto[prop];
+        const url = `${ctrlPath}${path}`;
+        const middleware = ctrlMiddleware.concat(actionMiddleware);
+        const fnName = prop.substring(PREFIX.length);
         return {method: method === 'del' ? 'delete' : method, url, middleware, fnName}
       });
   }
