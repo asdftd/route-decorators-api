@@ -15,6 +15,7 @@
     "url": "git+https://github.com/asdftd/route-decorators-api"
   },
   "jest": {
+    "testEnvironment": "node",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -44,12 +45,12 @@
   "homepage": "https://github.com/asdftd/route-decorators-api#readme",
   "devDependencies": {
     "@types/chai": "^4.1.6",
-    "@types/jest": "^23.3.5",
+    "@types/jest": "^24.0.11",
     "chai": "^4.2.0",
     "cpy-cli": "^2.0.0",
-    "jest": "^23.6.0",
+    "jest": "^24.7.1",
     "rimraf": "^2.6.2",
-    "ts-jest": "^23.10.4",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.1.2"
   }
 }
