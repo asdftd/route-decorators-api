@@ -158,6 +158,7 @@ describe('Parameter Decorators', () => {
       }
       DecoratorProcessor.registerProcessorFunction(DecoratorType.QUERY_PARAM, queryParamTransformer);
       class Ctrl extends BaseTest {
+        
         test(@QueryParam("getThisParam") a: string | any): void {
           assert.equal(a, "QueryParam123");
         }
