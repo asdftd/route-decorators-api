@@ -14,7 +14,7 @@ export class DecoratorProcessor {
         //this func will be executed
         return function(...args: any[]) {
             const params: any[] = DecoratorProcessor.getParamsForFunc(args, decorators);
-            sourceFunc.bind(thisValue, ...params)();
+            return sourceFunc.bind(thisValue, ...params)();
         }.bind(this);
     }
 
@@ -29,5 +29,9 @@ export class DecoratorProcessor {
 
     public static registerProcessorFunction(decoratorType: string, procFunc: Function) {
         this.processorFunctions.set(decoratorType, procFunc);
+    }
+
+    public static reset(){
+        this.processorFunctions = new Map<string, any>();
     }
 }
