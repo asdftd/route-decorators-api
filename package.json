@@ -6,6 +6,7 @@
     "build": "rimraf dist && tsc -p tsconfig.build.json && npm run build:esm",
     "build:esm": "rimraf dist_esm && tsc --module es2015 --outDir dist_esm -p tsconfig.build.json",
     "package": "cpy dist_esm/* package.json README.md LICENSE dist/ --parents",
+    "build:package": "npm run build && npm run package",
     "test": "jest --verbose"
   },
   "main": "./index.js",
@@ -24,7 +25,7 @@
     "transform": {
       "\\.(ts|tsx)$": "ts-jest"
     },
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
+    "testRegex": "/__tests__/.*\\Test.(ts|tsx|js)$"
   },
   "keywords": [
     "es6",
