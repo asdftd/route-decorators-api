@@ -58,9 +58,8 @@ export function QueryParam(name: string, ...validators: Function[]) {
 }
 
 function isPlacedOnMethodParameter(target: any, propertyKey: string, index: number) {
-    return (typeof target === 'function' && typeof target !== 'object')
-        || (typeof target !== 'function' && typeof target === 'object')
-        || typeof propertyKey !== "string" || typeof index !== "number";
+    return (typeof target === 'function' || typeof target === 'object')
+        && typeof propertyKey === "string" || typeof index === "number";
 }
 
 export function setDecorator(target: any, propertyKey: string, index: number, type: string, values?: any[]) {
