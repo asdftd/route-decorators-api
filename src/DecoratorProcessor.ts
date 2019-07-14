@@ -14,7 +14,7 @@ export class DecoratorProcessor {
         //this func will be executed
         return function(...args: any[]) {
             const params: any[] = DecoratorProcessor.getParamsForFunc(args, decorators);
-            return sourceFunc.bind(thisValue, ...params)();
+            return sourceFunc.call(thisValue, ...params);
         }.bind(this);
     }
 
