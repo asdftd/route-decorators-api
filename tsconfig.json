@@ -1,12 +1,12 @@
 {
     "compileOnSave": false,
       "compilerOptions": {
-        "target": "es2015",
+        "target": "ESNext",
         "sourceMap": true,
         "declaration": true,
         "moduleResolution": "node",
         "outDir": "dist",
-        "lib": ["es2017", "dom"],
+        "lib": ["ESNext"],
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true
       }
