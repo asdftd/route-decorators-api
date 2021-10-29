@@ -7,26 +7,13 @@
     "build:esm": "rimraf dist_esm && tsc --module es2015 --outDir dist_esm -p tsconfig.build.json",
     "package": "cpy dist_esm/* package.json README.md LICENSE dist/ --parents",
     "build:package": "npm run build && npm run package",
-    "test": "jest --verbose"
+    "test": "mocha --reporter spec tests/**Test*.ts"
   },
   "main": "./index.js",
   "module": "./dist_esm/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/asdftd/route-decorators-api"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "testRunner": "jest-circus/runner",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "\\.(ts|tsx)$": "ts-jest"
-    },
-    "testRegex": "/__tests__/.*\\Test.(ts|tsx|js)$"
   },
   "keywords": [
     "es6",
@@ -47,13 +34,13 @@
   "homepage": "https://github.com/asdftd/route-decorators-api#readme",
   "devDependencies": {
     "@types/chai": "^4.2.18",
-    "@types/jest": "^26.0.23",
+    "@types/mocha": "^9.0.0",
     "chai": "^4.3.4",
     "cpy-cli": "^3.1.1",
-    "jest": "^26.6.3",
-    "jest-circus": "^26.6.3",
+    "mocha": "^9.1.3",
+    "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "ts-jest": "^26.5.6",
+    "ts-node": "^10.4.0",
     "typescript": "^4.2.4"
   }
 }
