@@ -8,12 +8,12 @@ beforeEach(() => {
 describe('Parameter Decorators', () => {
     it('should work in conjunction', () => {
 
-        registerTransformer("val1", DecoratorType.NEXT, "1");
-        registerTransformer("val2", DecoratorType.REQUEST_PARAM, "2");
-        registerTransformer("val3", DecoratorType.BODY, "3");
-        registerTransformer("val4", DecoratorType.QUERY_PARAM, "4");
-        registerTransformer("val5", DecoratorType.RESPONSE, "5");
-        registerTransformer("val6", DecoratorType.REQUEST, "6");
+        registerTransformer("val1", DecoratorType.NEXT);
+        registerTransformer("val2", DecoratorType.REQUEST_PARAM);
+        registerTransformer("val3", DecoratorType.BODY);
+        registerTransformer("val4", DecoratorType.QUERY_PARAM);
+        registerTransformer("val5", DecoratorType.RESPONSE);
+        registerTransformer("val6", DecoratorType.REQUEST);
 
         class Ctrl extends BaseTest {
             test(@Next() next, @RequestParam("reqparam") reqParam, @Body() body, @QueryParam("queryparam") queryParam, @Response() resp, @Request() req): any {
@@ -26,7 +26,7 @@ describe('Parameter Decorators', () => {
                 return "returnvalue";
             }
         }
-        const returnValue = new Ctrl().test("1", "2", "3", "4", "5", "6");
+        const returnValue = new Ctrl().test("notused", "notused", "notused", "notused", "notused", "notused");
         assert.equal("returnvalue", returnValue, "Returned value from function stays the same");
     });
 });
@@ -35,12 +35,12 @@ describe('Parameter Decorators', () => {
 
 describe('Parameter and Route Decorators', () => {
     it('should work in conjunction', () => {
-        registerTransformer("val1", DecoratorType.NEXT, "1");
-        registerTransformer("val2", DecoratorType.REQUEST_PARAM, "2");
-        registerTransformer("val3", DecoratorType.BODY, "3");
-        registerTransformer("val4", DecoratorType.QUERY_PARAM, "4");
-        registerTransformer("val5", DecoratorType.RESPONSE, "5");
-        registerTransformer("val6", DecoratorType.REQUEST, "6");
+        registerTransformer("val1", DecoratorType.NEXT);
+        registerTransformer("val2", DecoratorType.REQUEST_PARAM);
+        registerTransformer("val3", DecoratorType.BODY);
+        registerTransformer("val4", DecoratorType.QUERY_PARAM);
+        registerTransformer("val5", DecoratorType.RESPONSE);
+        registerTransformer("val6", DecoratorType.REQUEST);
 
         @Controller()
         class Ctrl extends BaseTest {
@@ -55,15 +55,15 @@ describe('Parameter and Route Decorators', () => {
                 return "returnvalue";
             }
         }
-        const ctrl = (<any>new Ctrl());
-        assert.equal(ctrl.$routes[0].fnName, "testFunc");
-        const returnValue = ctrl["testFunc"].bind(this)("1", "2", "3", "4", "5", "6");
+        const ctrl = new Ctrl();
+        assert.equal((<any>ctrl).$routes[0].fnName, "testFunc");
+        const returnValue = ctrl.testFunc("notused", "notused", "notused", "notused", "notused", "notused");
         assert.equal("returnvalue", returnValue, "Returned value from function stays the same");
         
     });
 });
 
-function registerTransformer(returnValue: any, decoratorType: string, assertInputValue: any){
+function registerTransformer(returnValue: any, decoratorType: string){
 
     function transformer() {
         return function() {
